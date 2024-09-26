@@ -18,6 +18,7 @@ function cleanInput($data) {
     $data = trim($data);
     $data = strip_tags($data);
     $data = htmlspecialchars($data);
+    $data = strtolower($data);
     return $data;
 }
 
