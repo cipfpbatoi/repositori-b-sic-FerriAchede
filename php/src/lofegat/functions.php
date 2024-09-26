@@ -32,6 +32,7 @@ function isCorrectLetter($letter, $word){
     return false;
 }
 
+// Devuelve la letra en su posición correcta [X => "x,X => "_",X => "x",X => "_",]
 function putLetter($letters, $letter, $wordGuess){
     $wordGuessArray = str_split($wordGuess);
         for ($i=0; $i < strlen($wordGuess); $i++) { 
