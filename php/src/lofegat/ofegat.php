@@ -26,9 +26,9 @@
             $mistakes += 1;
         } else {
             echo "<span class='correct'>$letter Es correcto!</span>";
+            $letters = putLetter($letters, $letter, WORD_TO_GUESS);
         }
 
-        $letters = putLetter($letters, $letter, WORD_TO_GUESS);
     }
 
     viewLetters($letters);
