@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    require 'functions.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -11,26 +16,30 @@
 <body>
 
     <?php
-
-    require 'functions.php';
-
+    
     const WORD_TO_GUESS = "ofegat";
-    $letters = createArrayLetters(WORD_TO_GUESS); // Crea la array [X => "_",X => "_",]
-    $mistakes = 0;
+
+    if (!isset($_SESSION['word'])) {
+        $_SESSION['word'] = WORD_TO_GUESS;
+        $_SESSION['letters'] = createArrayLetters(WORD_TO_GUESS);
+        $_SESSION['mistakes'] = 0;
+    }
+    $letters = $_SESSION['letters'];
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $letter = cleanInput(substr($_POST['letra'], 0, 1)); // Limpia el input y lo guarda con solo una letra.
 
         if (!isCorrectLetter($letter, WORD_TO_GUESS)) {
             echo "<span class='incorrect'>La letra $letter no forma parte de la palabra</span>";
-            $mistakes += 1;
+            $_SESSION['mistakes'] += 1;
         } else {
             echo "<span class='correct'>$letter Es correcto!</span>";
+            $_SESSION['letters'] = putLetter($letters, $letter, WORD_TO_GUESS);
+            $letters = $_SESSION['letters'];
         }
-
-        $letters = putLetter($letters, $letter, WORD_TO_GUESS);
+        
+        
     }
-
     viewLetters($letters);
 
     ?>
@@ -43,7 +52,7 @@
             <button type="submit">Enviar</button>
         </div>
     </form>
-    <p>Fallos: <?= $mistakes ?></p>
+    <p>Fallos: <?= $_SESSION['mistakes'] ?></p>
 
 </body>
 
