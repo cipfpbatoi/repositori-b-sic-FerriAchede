@@ -44,12 +44,18 @@ function putLetter($letters, $letter, $wordGuess){
 }
 function hasLostOrWon($letter, $letters){
     if ($_SESSION['mistakes'] == MAX_MISTAKES) {
-        echo "<span class='incorrect'> Has perdido!</span>";
-        session_unset();
+        echo "<br><span class='incorrect'> Has perdido!</span>";
+        restartSession();
     }else if (implode("",$letters) == WORD_TO_GUESS){
-        echo "<span class='correct'> Has ganado!</span>";
-        session_unset();
+        echo "<br><span class='correct'> Has ganado!</span>";
+        restartSession();
     }
+}
+
+function restartSession(){
+    unset($_SESSION['word']);
+    unset($_SESSION['letters']);
+    unset($_SESSION['mistakes']);
 }
 
 ?>
