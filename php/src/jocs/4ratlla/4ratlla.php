@@ -13,7 +13,7 @@ if (isset($_POST['logout'])) {
 }
 
 if (isset($_SESSION['user'])) {
-    echo "Usuario: " . htmlspecialchars($_SESSION['user']) . "<br>";
+    $welcome = "Usuario: " . htmlspecialchars($_SESSION['user']) . "<br>";
 } else {
     header("Location: ../index.php");
     exit();
@@ -69,6 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['reset']) && !isset($_
 </head>
 
 <body>
+    <?=$welcome?>
     <h1>4 en Ratlla</h1>
     <main class="graella">
         <?php pintarGraella($_SESSION['tableGame']) ?>
