@@ -31,15 +31,6 @@ function pintarGraella($graella)
         }
         echo "</tr>";
     }
-
-    //Pinta la ultima linea
-    for ($i = 0; $i < 1; $i++) {
-        echo "<tr>";
-        for ($j = 0; $j < COLUMNS; $j++) {
-            echo "<td></td>";
-        }
-    }
-    echo "</table>";
 }
 
 function ferMoviment(&$graella, $columna, $jugadorActual)
